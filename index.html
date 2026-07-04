@@ -699,8 +699,8 @@
   }
   .form-input, .form-select, .form-textarea {
     width: 100%; padding: 12px 16px;
-    background: var(--black);
-    border: 1.5px solid #333;
+    background: #1e1e1e;
+    border: 1.5px solid #555;
     color: var(--white);
     font-family: 'Barlow', sans-serif;
     font-size: 14px;
@@ -708,11 +708,11 @@
     transition: border-color .2s;
     -webkit-appearance: none;
   }
-  .form-input::placeholder, .form-textarea::placeholder { color: #666; }
-  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--red); }
+  .form-input::placeholder, .form-textarea::placeholder { color: #888; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--red); outline: none; }
   .form-textarea { resize: vertical; min-height: 100px; }
-  .form-select { cursor: pointer; color: #888; }
-  .form-select option { background: var(--black-soft); }
+  .form-select { cursor: pointer; color: #ccc; }
+  .form-select option { background: #1e1e1e; }
   .btn-submit {
     width: 100%; padding: 16px;
     background: var(--red); color: var(--white);
