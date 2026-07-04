@@ -382,6 +382,7 @@
 
   /* ─── SECTION COMMONS ─── */
   section { padding: 100px 7%; }
+  #industries { padding-top: 20px; }
   .section-label {
     display: inline-flex; align-items: center; gap: 10px;
     font-family: 'Barlow Condensed', sans-serif;
@@ -409,7 +410,7 @@
   /* ─── PRODUCTS SECTION ─── */
   #products {
     background: var(--black);
-    padding-bottom: 120px;
+    padding-bottom: 0;
   }
   #products .section-title { color: var(--white); }
   #products .section-desc { color: #888; }
@@ -435,7 +436,7 @@
 
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2px;
   }
 
@@ -460,11 +461,11 @@
 
   .product-card-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px; color: rgba(212,43,43,0.12);
+    font-size: 48px; color: rgba(212,43,43,0.5);
     line-height: 1; margin-bottom: 16px;
     transition: color .3s;
   }
-  .product-card:hover .product-card-num { color: rgba(212,43,43,0.25); }
+  .product-card:hover .product-card-num { color: rgba(212,43,43,0.75); }
 
   .product-card-title {
     font-family: 'Barlow Condensed', sans-serif;
@@ -728,7 +729,7 @@
   /* ─── FULL CATALOGUE SECTION ─── */
   #catalogue {
     background: var(--white-off);
-    padding-bottom: 120px;
+    padding-bottom: 20px;
   }
   .catalogue-header {
     display: flex; align-items: flex-end; justify-content: space-between;
@@ -1190,7 +1191,10 @@
     .contact-detail-label { color: #AAAAAA; }
     .contact-detail-value { color: var(--white); font-size: 16px; }
     /* Product card text */
-    .product-card-desc { color: #AAAAAA; }
+    .product-card-desc { color: #AAAAAA; font-size: 16px; }
+    .product-card-num { color: rgba(212,43,43,0.5); font-size: 40px; margin-bottom: 10px; }
+    .product-card { padding: 28px 20px; }
+    .products-grid { gap: 2px; grid-template-columns: 1fr; }
     .why-body { color: #555; font-size: 15px; }
     /* Catalogue cards */
     .cat-card-desc { color: #555; font-size: 14px; }
@@ -1421,7 +1425,7 @@
     </div>
 
     <!-- Tesa ACXplus - Featured -->
-    <div class="product-card featured" data-pid="tesa-acx">
+    <div class="product-card" data-pid="tesa-acx">
       <div class="product-card-num">05</div>
       <div class="product-card-title">Industrial High-Bond Double-Sided Tape</div>
       <div class="product-card-desc">
@@ -1452,7 +1456,7 @@
     </div>
 
     <!-- BOPP Packaging Tapes -->
-    <div class="product-card" data-pid="bopp">
+    <div class="product-card featured" data-pid="bopp">
       <div class="product-card-num">07</div>
       <div class="product-card-title">BOPP Packaging Tapes</div>
       <div class="product-card-desc">
