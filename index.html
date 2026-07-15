@@ -2077,27 +2077,27 @@
       <div id="form-success" style="display:none;background:rgba(5,150,105,0.12);border:1.5px solid #059669;color:#6ee7b7;padding:16px 20px;margin-bottom:20px;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:1px;">
         ✓ &nbsp;ENQUIRY SENT — We'll get back to you within one business day.
       </div>
-      <form id="enquiry-form" name="enquiry" method="POST" data-netlify="true" novalidate>
+      <form id="enquiry-form" name="contact" method="POST" data-netlify="true" novalidate>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="f-name">Your Name *</label>
-          <input type="text" id="f-name" class="form-input" placeholder="Full Name" required>
+          <input type="text" id="f-name" name="name" class="form-input" placeholder="Full Name" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="f-company">Company *</label>
-          <input type="text" id="f-company" class="form-input" placeholder="Company Name" required>
+          <input type="text" id="f-company" name="company" class="form-input" placeholder="Company Name" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="f-phone">Phone *</label>
-          <input type="tel" id="f-phone" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+          <input type="tel" id="f-phone" name="phone" class="form-input" placeholder="+91 XXXXX XXXXX" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="f-email">Email</label>
-          <input type="email" id="f-email" class="form-input" placeholder="you@company.com">
+          <input type="email" id="f-email" name="email" class="form-input" placeholder="you@company.com">
         </div>
         <div class="form-group full">
           <label class="form-label" for="f-product">Product Interest</label>
-          <select id="f-product" class="form-select">
+          <select id="f-product" name="product" class="form-select">
             <option value="">— Select a product —</option>
             <option>Air Permeability / Venting Tape</option>
             <option>Component Holding Tape</option>
@@ -2112,7 +2112,7 @@
         </div>
         <div class="form-group full">
           <label class="form-label" for="f-message">Message / Specifications</label>
-          <textarea id="f-message" class="form-textarea" placeholder="Tell us about your application, quantities required, dimensions needed..."></textarea>
+          <textarea id="f-message" name="message" class="form-textarea" placeholder="Tell us about your application, quantities required, dimensions needed..."></textarea>
         </div>
       </div>
       <div id="form-error" style="display:none;color:#f87171;font-size:13px;margin-bottom:10px;font-family:'Barlow',sans-serif;"></div>
