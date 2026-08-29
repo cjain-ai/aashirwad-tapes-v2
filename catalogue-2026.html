@@ -139,26 +139,29 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 /* ---- cover: logo tight to the top, credit strip pinned low ------------ */
 .slide.cover{justify-content:space-between; gap:clamp(16px,3vh,30px);
              padding-top:clamp(16px,3vh,34px)}
-.coverfoot{display:flex; flex-direction:column; gap:10px}
-.ladbar{width:100%; background:var(--black-soft); border:1px solid #333333;
-        border-left:3px solid var(--red); border-radius:2px; padding:9px 14px}
+/* the scan tile sets the height; the credit and the buttons stack beside it
+   and together come to exactly that height. */
+.coverfoot{display:flex; flex-direction:row; gap:10px; align-items:stretch}
+.scan{flex:0 0 auto; width:clamp(112px,13.5vw,132px); padding:5px; background:#FFFFFF;
+      border-radius:2px; display:block; line-height:0; align-self:flex-start}
+.scan img{width:100%; height:auto; display:block;
+          image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
+.footright{flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:9px}
+.ladbar{flex:1 1 auto; display:flex; align-items:center; background:var(--black-soft);
+        border:1px solid #333333; border-left:3px solid var(--red); border-radius:2px;
+        padding:8px 13px}
 .ladbar b{font-family:var(--cond); font-weight:700; color:var(--gray-light);
-          font-size:clamp(11.5px,1.35vw,13.5px); letter-spacing:.14em; text-transform:uppercase;
+          font-size:clamp(11px,1.3vw,13px); letter-spacing:.13em; text-transform:uppercase;
           line-height:1.35}
-.ladname{color:var(--white); font-size:clamp(14px,1.7vw,17px); letter-spacing:.07em;
-         white-space:nowrap}
-/* the scan tile and the two game buttons share one row */
-.plays{display:flex; flex-wrap:nowrap; gap:9px; align-items:stretch}
-.plays .scan{flex:0 0 auto; width:clamp(112px,13.5vw,130px); padding:5px; background:#FFFFFF;
-             border-radius:2px; display:block; line-height:0}
-.plays .scan img{width:100%; height:auto; display:block;
-                 image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
-.plays a:not(.scan){flex:1 1 0; min-width:0; display:flex; align-items:center; justify-content:center;
+.ladname{display:block; color:var(--white); font-size:clamp(14px,1.7vw,17.5px);
+         letter-spacing:.07em; white-space:nowrap}
+.plays{display:flex; flex-wrap:nowrap; gap:9px; flex:0 0 auto}
+.plays a{flex:1 1 0; min-width:0; display:flex; align-items:center; justify-content:center;
          text-align:center; font-family:var(--cond); font-weight:700;
-         font-size:clamp(12px,1.45vw,14.5px); letter-spacing:.07em; text-transform:uppercase;
-         color:#FFFFFF; background:var(--red); padding:10px 8px; border-radius:2px;
-         text-decoration:none; line-height:1.2}
-.plays a:not(.scan):hover{background:var(--red-dark)}
+         font-size:clamp(11.5px,1.4vw,14px); letter-spacing:.06em; text-transform:uppercase;
+         color:#FFFFFF; background:var(--red); padding:8px 6px; border-radius:2px;
+         text-decoration:none; line-height:1.18}
+.plays a:hover{background:var(--red-dark)}
 
 /* ---- tape photography ------------------------------------------------- */
 .phototrio{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:26px}
@@ -272,7 +275,7 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   :root{--bar:70px}
   .g2,.g3,.g5{grid-template-columns:1fr}
   .phototrio{grid-template-columns:repeat(2,1fr); gap:14px}
-  .plays a:not(.scan){font-size:11.5px; letter-spacing:.03em; padding:10px 5px}
+  .plays a{font-size:11px; letter-spacing:.02em; padding:8px 4px}
   #where .ttl{display:none}
   .game{flex-direction:column; align-items:flex-start}
   .stats{gap:14px}
@@ -307,16 +310,18 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
     <!-- The credit and the games sit on the cover, not only on the closing
          slide, because most readers never reach the last page. -->
     <div class="coverfoot">
-      <div class="ladbar">
-        <b>Marketing strategy &amp; execution partner
-           <span class="ladname">Live AI Dream</span></b>
-      </div>
-      <div class="plays">
-        <a class="scan" href="https://liveaidream.com" target="_blank" rel="noopener">
-          <img src="assets/qr-lad.png" alt="Scan for liveaidream.com" loading="lazy">
-        </a>
-        <a href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">Play AR<br>Tape Game</a>
-        <a href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">Play Tape<br>Roll Out</a>
+      <a class="scan" href="https://liveaidream.com" target="_blank" rel="noopener">
+        <img src="assets/qr-lad.png" alt="Scan for liveaidream.com" loading="lazy">
+      </a>
+      <div class="footright">
+        <div class="ladbar">
+          <b>Marketing strategy &amp; execution partner
+             <span class="ladname">Live AI Dream</span></b>
+        </div>
+        <div class="plays">
+          <a href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">Play AR<br>Tape Game</a>
+          <a href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">Play Tape<br>Roll Out</a>
+        </div>
       </div>
     </div>
 
