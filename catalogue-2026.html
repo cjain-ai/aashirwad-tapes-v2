@@ -44,16 +44,19 @@ body{
 
 /* ---- the deck: one screen per slide, snapped ------------------------- */
 #deck{
-  height:100dvh; overflow-y:scroll; overflow-x:hidden;
-  scroll-snap-type:y mandatory; scroll-behavior:smooth;
-  scrollbar-width:none;
+  height:100dvh; display:flex; flex-direction:row; flex-wrap:nowrap;
+  overflow-x:scroll; overflow-y:hidden;
+  scroll-snap-type:x mandatory; scroll-behavior:smooth;
+  overscroll-behavior-x:contain; scrollbar-width:none;
 }
 #deck::-webkit-scrollbar{display:none}
 .slide{
-  min-height:100dvh; scroll-snap-align:start; scroll-snap-stop:always;
-  padding:calc(var(--pad) * .9) var(--pad) calc(var(--bar) + 18px);
-  display:flex; flex-direction:column; justify-content:center;
-  position:relative; overflow-x:clip;
+  flex:0 0 100%; width:100%; height:100dvh;
+  scroll-snap-align:start; scroll-snap-stop:always;
+  padding:var(--pad) var(--pad) calc(var(--bar) + var(--pad));
+  display:flex; flex-direction:column; justify-content:safe center;
+  position:relative; overflow-y:auto; overflow-x:hidden;
+  scrollbar-width:thin;
   background:var(--white); color:var(--black);
 }
 .slide.alt{background:var(--white-off)}
@@ -136,27 +139,39 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 /* ---- cover: logo tight to the top, credit strip pinned low ------------ */
 .slide.cover{justify-content:space-between; gap:clamp(16px,3vh,30px);
              padding-top:clamp(16px,3vh,34px)}
-.ladstrip{display:flex; gap:14px; align-items:center; background:var(--black-soft);
-          border:1px solid #333333; border-left:3px solid var(--red); border-radius:2px;
-          padding:12px 15px}
-.ladstrip > img{width:clamp(66px,9vw,86px); height:auto; flex:0 0 auto;
-                background:#FFFFFF; padding:4px; border-radius:2px; display:block}
-.ls-role{margin:0; font-family:var(--cond); font-weight:700; color:var(--red);
-         font-size:clamp(10.5px,1.25vw,12px); letter-spacing:.19em; text-transform:uppercase}
-.ladstrip b{display:block; font-family:var(--display); font-weight:400; color:var(--white);
-            font-size:clamp(21px,2.7vw,28px); letter-spacing:1px; line-height:1.05; margin:3px 0 0}
-.ls-scope{margin:5px 0 0; font-size:clamp(11.5px,1.3vw,13px); font-weight:500;
-          color:var(--gray-light); line-height:1.4}
-.ladstrip .plays{display:flex; flex-wrap:wrap; gap:8px; margin-top:11px}
-.ladstrip .plays a{font-family:var(--cond); font-weight:700; font-size:12.5px; letter-spacing:.11em;
-                   text-transform:uppercase; color:#FFFFFF; background:var(--red);
-                   padding:8px 13px; border-radius:2px; text-decoration:none}
-.ladstrip .plays a:hover{background:var(--red-dark)}
+.coverfoot{display:flex; flex-direction:column; gap:10px}
+.ladbar{display:flex; gap:14px; align-items:center; width:100%;
+        background:var(--black-soft); border:1px solid #333333; border-left:3px solid var(--red);
+        border-radius:2px; padding:10px 14px}
+.ladbar > img{width:clamp(88px,10vw,104px); height:auto; flex:0 0 auto; display:block;
+              background:#FFFFFF; padding:4px; border-radius:2px;
+              image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
+.ladbar b{font-family:var(--cond); font-weight:700; color:var(--gray-light);
+          font-size:clamp(12px,1.4vw,14px); letter-spacing:.15em; text-transform:uppercase;
+          line-height:1.3}
+.ladname{color:var(--white); font-size:clamp(16px,1.9vw,19px); letter-spacing:.08em}
+.plays{display:flex; flex-wrap:wrap; gap:10px}
+.plays a{flex:1 1 190px; text-align:center; font-family:var(--cond); font-weight:700;
+         font-size:clamp(13px,1.5vw,15px); letter-spacing:.12em; text-transform:uppercase;
+         color:#FFFFFF; background:var(--red); padding:13px 16px; border-radius:2px;
+         text-decoration:none}
+.plays a:hover{background:var(--red-dark)}
+
+/* ---- tape photography ------------------------------------------------- */
+.phototrio{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:26px}
+.phototrio figure{margin:0}
+.phototrio img{width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border-radius:2px;
+               background:var(--white-off)}
+.phototrio figcaption{font-family:var(--cond); font-weight:700; font-size:clamp(12px,1.4vw,14px);
+                      letter-spacing:.16em; text-transform:uppercase; color:var(--red); margin-top:9px}
+.phototrio span{display:block; font-size:13px; font-weight:500; color:#444444; margin-top:2px; line-height:1.4}
 
 /* ---- games ----------------------------------------------------------- */
 .game{display:flex; gap:16px; align-items:center; background:var(--black-soft);
       border:1px solid #333333; border-radius:2px; padding:16px}
-.game img.qr{width:clamp(96px,13vw,128px); height:auto; border-radius:2px; background:#FFFFFF; padding:7px; flex:0 0 auto}
+.game img.qr{width:clamp(132px,17vw,164px); height:auto; border-radius:2px; background:#FFFFFF;
+             padding:8px; flex:0 0 auto;
+             image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
 .game .gt{min-width:0}
 .play{display:inline-block; margin-top:10px; font-family:var(--cond); font-weight:700; font-size:13.5px;
       letter-spacing:.14em; text-transform:uppercase; color:var(--black); background:var(--red);
@@ -170,7 +185,7 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 .work .w span{font-size:13.5px; font-weight:500; color:var(--gray-light); line-height:1.45; display:block; margin-top:3px}
 .ladqr{display:inline-flex; align-items:center; gap:11px; font-family:var(--cond); font-weight:700;
        font-size:12.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--gray-light); line-height:1.35}
-.ladqr img{width:64px; height:64px; background:#FFFFFF; padding:5px; border-radius:2px; display:block;
+.ladqr img{width:92px; height:92px; background:#FFFFFF; padding:5px; border-radius:2px; display:block;
            image-rendering:pixelated}
 .ctas{display:flex; flex-wrap:wrap; gap:12px; margin-top:26px}
 .btn{display:inline-flex; align-items:center; gap:9px; text-decoration:none; border-radius:2px;
@@ -194,10 +209,13 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 .navbtn{
   flex:0 0 auto; width:42px; height:42px; border-radius:2px; cursor:pointer;
   background:transparent; border:1px solid #3E3E3E; color:var(--white);
-  font-size:20px; line-height:1; display:flex; align-items:center; justify-content:center;
+  font-size:22px; line-height:1; display:flex; align-items:center; justify-content:center;
 }
 .navbtn:hover:not(:disabled){background:var(--red); border-color:var(--red)}
 .navbtn:disabled{opacity:.32; cursor:default}
+/* forward is the action almost everyone wants, so it is filled, not outlined */
+#next:not(:disabled){background:var(--red); border-color:var(--red); width:48px; font-size:24px}
+#next:not(:disabled):hover{background:var(--red-dark); border-color:var(--red-dark)}
 #where{
   flex:1 1 auto; min-width:0; display:flex; align-items:baseline; gap:11px;
   background:transparent; border:0; color:var(--white); cursor:pointer;
@@ -235,13 +253,6 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 #index .credit a{color:var(--white)}
 
 /* ---- swipe hint ------------------------------------------------------- */
-#hint{
-  position:absolute; left:var(--pad); bottom:calc(var(--bar) + 22px);
-  font-family:var(--cond); font-weight:700; font-size:12.5px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--gray-light); display:flex; align-items:center; gap:10px;
-}
-#hint .arrow{display:inline-block; animation:nudge 1.9s ease-in-out infinite}
-@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 /* ---- responsive ------------------------------------------------------- */
 @media (max-width:900px){
@@ -251,24 +262,22 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   .split .art{display:none}
 }
 @media (max-width:900px){
-  .g5{grid-auto-flow:column; grid-auto-columns:minmax(210px,1fr); grid-template-columns:none;
-      overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x proximity; padding-bottom:8px}
-  .g5 .card{scroll-snap-align:start}
+  .g5{grid-template-columns:repeat(2,1fr)}
   .g5 .card figure{aspect-ratio:16/10}
 }
 @media (max-width:560px){
   :root{--bar:70px}
-  .g2,.g3{grid-template-columns:1fr}
+  .g2,.g3,.g5{grid-template-columns:1fr}
+  .phototrio{grid-template-columns:repeat(2,1fr); gap:14px}
   #where .ttl{display:none}
   .game{flex-direction:column; align-items:flex-start}
   .stats{gap:14px}
 }
 @media (max-height:560px){
-  .lede{font-size:15px} .card p{font-size:12.5px} #hint{display:none}
+  .lede{font-size:15px} .card p{font-size:12.5px}
 }
 @media (prefers-reduced-motion:reduce){
-  #deck{scroll-behavior:auto} #hint .arrow{animation:none}
+  #deck{scroll-behavior:auto}
 }
 </style>
 </head>
@@ -293,39 +302,50 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 
     <!-- The credit and the games sit on the cover, not only on the closing
          slide, because most readers never reach the last page. -->
-    <div class="ladstrip">
-      <img src="assets/qr-lad.png" alt="QR code to liveaidream.com" loading="lazy">
-      <div class="ls-t">
-        <p class="ls-role">Marketing strategy &amp; execution partner</p>
-        <b>Live AI Dream</b>
-        <p class="ls-scope">Brand &amp; print &middot; Stand design &middot; Website &middot; Interactive experiences</p>
-        <div class="plays">
-          <a href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">Play the AR game</a>
-          <a href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">Play Roll Out</a>
-        </div>
+    <div class="coverfoot">
+      <div class="ladbar">
+        <img src="assets/qr-lad.png" alt="QR code to liveaidream.com" loading="lazy">
+        <b>Marketing strategy &amp; execution partner<br>
+           <span class="ladname">Live AI Dream</span></b>
+      </div>
+      <div class="plays">
+        <a href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">Play AR Tape Game</a>
+        <a href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">Play Tape Roll Out</a>
       </div>
     </div>
 
-    <p id="hint" style="position:static;margin:0;padding:0">
-      <span class="arrow">&#8595;</span> Swipe to browse the range
-    </p>
   </section>
 
   <!-- 02 ---------------------------------------------------------------- -->
-  <section class="slide" data-t="About Aashirwad" data-ask="the DEFIGO range">
-    <div class="split">
-      <div class="stack">
-        <p class="eyebrow">Who we are</p>
-        <hr class="rule">
-        <h2>THIRTY YEARS OF<br><span class="accent">MAKING THINGS HOLD.</span></h2>
-        <p class="lede">Aashirwad Tapes Industries manufactures the DEFIGO range from its plant at
-          Kundli, Sonipat, Haryana, and is an authorised distributor for TESA.</p>
-        <p class="body">We supply B2B, direct to manufacturers &mdash; appliance and white goods plants,
-          HVAC fabricators, automotive and EV assemblers, construction contractors and packaging lines.
-          Tapes are made to the carrier, adhesive and width the application needs, not sold off a shelf.</p>
-      </div>
-      <div class="art"><img class="hero-art" src="assets/cat-rolls.webp" alt="DEFIGO tape rolls" loading="lazy"></div>
+  <section class="slide" data-t="What a tape does" data-ask="the DEFIGO range">
+    <p class="eyebrow">DEFIGO &middot; Manufactured at Kundli, Sonipat</p>
+    <hr class="rule">
+    <h2>FOUR JOBS.<br><span class="accent">ONE SUPPLIER.</span></h2>
+    <div class="phototrio">
+      <figure>
+        <img src="assets/tape-polyimide.webp" alt="Thin film insulation tape" loading="lazy">
+        <figcaption>Insulate</figcaption>
+        <span>Thin film carriers for a clean electrical barrier.</span>
+      </figure>
+      <figure>
+        <img src="assets/tape-glasscloth.webp" alt="Woven glass-cloth tape" loading="lazy">
+        <figcaption>Protect</figcaption>
+        <span>Glass cloth and fleece where it gets hot or rubs.</span>
+      </figure>
+      <figure>
+        <img src="assets/tape-foam.webp" alt="Closed-cell foam tape" loading="lazy">
+        <figcaption>Seal</figcaption>
+        <span>Closed&#8209;cell foam to close a gap and damp a panel.</span>
+      </figure>
+      <figure>
+        <img src="assets/tape-polyester.webp" alt="Polyester tape" loading="lazy">
+        <figcaption>Bond</figcaption>
+        <span>Polyester, tissue and high&#8209;bond for holding fast.</span>
+      </figure>
     </div>
+    <p class="body">Thirty years of making things hold &mdash; supplied B2B, direct to appliance,
+      HVAC, automotive, EV, construction and packaging manufacturers, and made to the carrier,
+      adhesive and width the application needs.</p>
   </section>
 
   <!-- 03 ---------------------------------------------------------------- -->
@@ -513,20 +533,20 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
     <p class="lede">Scan and play &mdash; no app, no download. Built for Aashirwad by Live AI Dream.</p>
     <div class="grid g2">
       <div class="game">
-        <img class="qr" src="assets/qr-ar.png" alt="QR code to play the AR tape game" loading="lazy">
+        <img class="qr" src="assets/qr-ar.png" alt="QR code to play the AR Tape Game" loading="lazy">
         <div class="gt">
           <div class="card-k" style="font-family:var(--cond);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--red)">AR experience</div>
-          <h3>Catch the Tape</h3>
+          <h3>AR Tape Game</h3>
           <p style="margin:6px 0 0;font-size:14px;color:var(--gray-light);line-height:1.5">
             Point the camera, throw a roll, hit the target before the clock runs out.</p>
           <a class="play" href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">Play now</a>
         </div>
       </div>
       <div class="game">
-        <img class="qr" src="assets/qr-run.png" alt="QR code to play the Roll Out game" loading="lazy">
+        <img class="qr" src="assets/qr-run.png" alt="QR code to play Tape Roll Out" loading="lazy">
         <div class="gt">
           <div class="card-k" style="font-family:var(--cond);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--red)">Arcade</div>
-          <h3>Roll Out</h3>
+          <h3>Tape Roll Out</h3>
           <p style="margin:6px 0 0;font-size:14px;color:var(--gray-light);line-height:1.5">
             Run the line, clear the walls, keep the roll moving for sixty seconds.</p>
           <a class="play" href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">Play now</a>
@@ -548,8 +568,8 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
       <div class="w"><b>Stall &amp; exhibition design</b><span>Stand layout, panels, banners and print artwork.</span></div>
       <div class="w"><b>Website &amp; SEO</b><span>aashirwadtapes.com &mdash; built, structured and optimised to be found.</span></div>
       <div class="w"><b>This catalogue</b><span>Digital catalogue and the printed brochure it came from.</span></div>
-      <div class="w"><b>AR experience</b><span>Catch the Tape &mdash; a browser AR game that captures a lead.</span></div>
-      <div class="w"><b>Roll Out arcade game</b><span>A sixty&#8209;second game that turns a visitor into a WhatsApp enquiry.</span></div>
+      <div class="w"><b>AR Tape Game</b><span>A browser AR game that captures a lead.</span></div>
+      <div class="w"><b>Tape Roll Out</b><span>A sixty&#8209;second game that turns a visitor into a WhatsApp enquiry.</span></div>
     </div>
     <div class="ctas" style="align-items:center">
       <a class="btn btn-wa" id="ladwa" href="#" target="_blank" rel="noopener">
@@ -644,7 +664,7 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 
   function go(i) {
     i = Math.max(0, Math.min(total - 1, i));
-    slides[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    slides[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
   }
 
   slides.forEach(function (s, i) {
@@ -661,10 +681,10 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   var ticking = false;
   function track() {
     ticking = false;
-    var mark = deck.clientHeight * 0.4;
+    var mark = deck.clientWidth * 0.5;
     for (var i = 0; i < total; i++) {
       var r = slides[i].getBoundingClientRect();
-      if (r.top <= mark && r.bottom > mark) {
+      if (r.left <= mark && r.right > mark) {
         if (i !== cur) { cur = i; paint(); }
         return;
       }
@@ -687,9 +707,9 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closeIndex(); return; }
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') {
       e.preventDefault(); go(cur + 1);
-    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
       e.preventDefault(); go(cur - 1);
     } else if (e.key === 'Home') { e.preventDefault(); go(0); }
     else if (e.key === 'End')  { e.preventDefault(); go(total - 1); }
