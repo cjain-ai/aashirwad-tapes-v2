@@ -125,6 +125,14 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 .mark{height:clamp(34px,4.4vw,50px); width:auto; display:block;
       align-self:flex-start; max-width:min(280px,66vw); object-fit:contain}
 
+/* the three credibility figures ride the cover as well as page three --
+   a reader who never scrolls past page one still gets them. */
+.factbar{display:flex; flex-wrap:wrap; gap:clamp(16px,3.4vw,38px); margin-top:clamp(16px,2.4vh,26px)}
+.factbar span{font-family:var(--cond); font-weight:700; font-size:clamp(11px,1.3vw,13px);
+              letter-spacing:.13em; text-transform:uppercase; color:var(--white); line-height:1.25}
+.factbar b{display:block; font-family:var(--display); font-weight:400; color:var(--red);
+           font-size:clamp(34px,4.6vw,52px); line-height:.9; letter-spacing:1px; margin-bottom:4px}
+
 /* ---- cover: logo tight to the top, credit strip pinned low ------------ */
 .slide.cover{justify-content:space-between; gap:clamp(16px,3vh,30px);
              padding-top:clamp(16px,3vh,34px)}
@@ -133,10 +141,13 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
           padding:12px 15px}
 .ladstrip > img{width:clamp(66px,9vw,86px); height:auto; flex:0 0 auto;
                 background:#FFFFFF; padding:4px; border-radius:2px; display:block}
-.ladstrip b{display:block; font-family:var(--cond); font-weight:700; color:var(--white);
-            font-size:clamp(14px,1.7vw,17px); letter-spacing:.06em; text-transform:uppercase;
-            line-height:1.22}
-.ladstrip .plays{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.ls-role{margin:0; font-family:var(--cond); font-weight:700; color:var(--red);
+         font-size:clamp(10.5px,1.25vw,12px); letter-spacing:.19em; text-transform:uppercase}
+.ladstrip b{display:block; font-family:var(--display); font-weight:400; color:var(--white);
+            font-size:clamp(21px,2.7vw,28px); letter-spacing:1px; line-height:1.05; margin:3px 0 0}
+.ls-scope{margin:5px 0 0; font-size:clamp(11.5px,1.3vw,13px); font-weight:500;
+          color:var(--gray-light); line-height:1.4}
+.ladstrip .plays{display:flex; flex-wrap:wrap; gap:8px; margin-top:11px}
 .ladstrip .plays a{font-family:var(--cond); font-weight:700; font-size:12.5px; letter-spacing:.11em;
                    text-transform:uppercase; color:#FFFFFF; background:var(--red);
                    padding:8px 13px; border-radius:2px; text-decoration:none}
@@ -273,6 +284,11 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
       <h1>BUILT TO<br><span class="accent">BOND.</span><br>MADE TO LAST.</h1>
       <p class="lede">Industrial adhesive tapes manufactured in Kundli, Sonipat &mdash; for EV battery and
         e&#8209;powertrain, white goods, HVAC, automotive, construction and packaging.</p>
+      <div class="factbar">
+        <span><b>30+</b>Years of<br>experience</span>
+        <span><b>600+</b>B2B<br>clients</span>
+        <span><b>40+</b>Products<br>offered</span>
+      </div>
     </div>
 
     <!-- The credit and the games sit on the cover, not only on the closing
@@ -280,7 +296,9 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
     <div class="ladstrip">
       <img src="assets/qr-lad.png" alt="QR code to liveaidream.com" loading="lazy">
       <div class="ls-t">
-        <b>Marketing, stall experience &amp; games<br>created by Live AI Dream</b>
+        <p class="ls-role">Marketing strategy &amp; execution partner</p>
+        <b>Live AI Dream</b>
+        <p class="ls-scope">Brand &amp; print &middot; Stand design &middot; Website &middot; Interactive experiences</p>
         <div class="plays">
           <a href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">Play the AR game</a>
           <a href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">Play Roll Out</a>
@@ -520,7 +538,7 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   <!-- 14 ---------------------------------------------------------------- -->
   <section class="slide dark" data-t="Built by Live AI Dream" data-ask="the DEFIGO range">
     <img class="mark" src="assets/lad-mark.webp" alt="Live AI Dream" loading="lazy">
-    <p class="eyebrow" style="margin-top:18px">Marketing strategy &amp; execution</p>
+    <p class="eyebrow" style="margin-top:18px">Marketing strategy &amp; execution partner</p>
     <hr class="rule">
     <h2>EVERYTHING YOU JUST SAW<br>WAS BUILT BY<br><span class="accent">LIVE AI DREAM.</span></h2>
     <p class="lede">Strategy, design, build and the experiences on the stand &mdash; one team,
@@ -557,7 +575,7 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 <div id="index" role="dialog" aria-modal="true" aria-label="Catalogue contents">
   <h4>Contents</h4>
   <div class="ixgrid" id="ixgrid"></div>
-  <p class="credit">Marketing, stall experience &amp; games created by
+  <p class="credit">Marketing strategy &amp; execution partner &mdash;
     <a href="https://liveaidream.com" target="_blank" rel="noopener">Live AI Dream</a></p>
 </div>
 
