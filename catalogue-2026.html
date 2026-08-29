@@ -153,14 +153,14 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 .ladname{display:block; color:var(--white); font-size:clamp(14px,1.7vw,17.5px);
          letter-spacing:.07em; white-space:nowrap}
 .tiles{display:flex; flex-wrap:nowrap; gap:9px; align-items:flex-start}
-.tile{flex:0 1 128px; min-width:0; display:flex; flex-direction:column; text-decoration:none}
+.tile{flex:0 1 112px; max-width:112px; min-width:0; display:flex; flex-direction:column; text-decoration:none}
 .tile img{width:100%; height:auto; display:block; background:#FFFFFF; padding:4px;
           border-radius:2px 2px 0 0;
           image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
 .lbl{display:block; text-align:center; font-family:var(--cond); font-weight:700;
-     font-size:clamp(10.5px,1.25vw,13px); letter-spacing:.06em; text-transform:uppercase;
-     color:#FFFFFF; background:var(--red); padding:8px 5px; border-radius:0 0 2px 2px;
-     line-height:1.2}
+     font-size:clamp(11.5px,1.35vw,13.5px); letter-spacing:.07em; text-transform:uppercase;
+     color:#FFFFFF; background:var(--red); padding:9px 6px; border-radius:0 0 2px 2px;
+     line-height:1.28}
 .tile:hover .lbl{background:var(--red-dark)}
 
 /* ---- tape photography ------------------------------------------------- */
@@ -275,9 +275,7 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   :root{--bar:70px}
   .g2,.g3,.g5{grid-template-columns:1fr}
   .phototrio{grid-template-columns:repeat(2,1fr); gap:14px}
-  .lbl{font-size:9.5px; letter-spacing:.01em; padding:7px 3px}
-  .tile{flex:1 1 0}
-  .coverfoot{align-self:stretch; padding:11px}
+  .coverfoot{align-self:flex-start; padding:12px}
   #where .ttl{display:none}
   .game{flex-direction:column; align-items:flex-start}
   .stats{gap:14px}
