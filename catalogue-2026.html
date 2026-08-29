@@ -22,12 +22,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&family=Barlow+Condensed:wght@600;700;900&display=swap">
 <style>
 :root{
-  --red:#D42B2B; --red-dark:#A51F1F;
+  --red:#D42B2B; --red-dark:#A51F1F; --red-light:#E84040;
   --black:#111111; --black-soft:#1C1C1C; --black-mid:#2A2A2A;
   --white:#FFFFFF; --white-off:#F5F5F5; --white-dim:#E8E8E8;
   --gray:#888888; --gray-light:#CCCCCC;
   --wa:#25D366;
-  --bar:76px;
+  --bar:62px;
   --pad:clamp(22px,5vw,80px);
   --display:'Bebas Neue',Impact,sans-serif;
   --cond:'Barlow Condensed','Arial Narrow',sans-serif;
@@ -65,11 +65,11 @@ body{
 
 /* ---- type ------------------------------------------------------------ */
 .eyebrow{
-  font-family:var(--cond); font-weight:700; font-size:clamp(12px,1.6vw,15px);
-  letter-spacing:.22em; text-transform:uppercase; color:var(--red);
+  font-family:var(--cond); font-weight:700; font-size:clamp(13.5px,1.75vw,16px);
+  letter-spacing:.18em; text-transform:uppercase; color:var(--red);
   margin:0 0 14px;
 }
-.slide.dark .eyebrow{color:var(--red)}
+.slide.dark .eyebrow{color:var(--red-light)}
 h1,h2{font-family:var(--display); font-weight:400; margin:0; line-height:.94; letter-spacing:1px; text-wrap:balance}
 h1{font-size:clamp(36px,6vw,72px)}
 h2{font-size:clamp(34px,5.6vw,68px)}
@@ -128,41 +128,48 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 .mark{height:clamp(34px,4.4vw,50px); width:auto; display:block;
       align-self:flex-start; max-width:min(280px,66vw); object-fit:contain}
 
+.cta{display:inline-flex; align-self:flex-start; align-items:center; gap:9px; margin-top:20px;
+     background:var(--wa); color:#0B2E17; text-decoration:none; border-radius:2px;
+     font-family:var(--cond); font-weight:700; font-size:clamp(13px,1.6vw,15.5px);
+     letter-spacing:.11em; text-transform:uppercase; padding:12px 18px}
+.cta:hover{filter:brightness(1.08)}
+.cta svg{width:17px; height:17px; flex:0 0 auto}
+
 /* the three credibility figures ride the cover as well as page three --
    a reader who never scrolls past page one still gets them. */
 .factbar{display:flex; flex-wrap:wrap; gap:clamp(16px,3.4vw,38px); margin-top:clamp(16px,2.4vh,26px)}
-.factbar span{font-family:var(--cond); font-weight:700; font-size:clamp(11px,1.3vw,13px);
-              letter-spacing:.13em; text-transform:uppercase; color:var(--white); line-height:1.25}
+.factbar span{font-family:var(--cond); font-weight:700; font-size:clamp(12.5px,1.5vw,14.5px);
+              letter-spacing:.11em; text-transform:uppercase; color:var(--white); line-height:1.3}
 .factbar b{display:block; font-family:var(--display); font-weight:400; color:var(--red);
            font-size:clamp(34px,4.6vw,52px); line-height:.9; letter-spacing:1px; margin-bottom:4px}
 
 /* ---- cover: logo tight to the top, credit strip pinned low ------------ */
 .slide.cover{justify-content:space-between; gap:clamp(14px,2.4vh,24px);
              padding-top:clamp(16px,3vh,34px);
-             padding-bottom:calc(var(--bar) + 16px)}
+             padding-bottom:calc(var(--bar) + 6px)}
 /* three labelled codes in one box: scan one, or tap it -- the label is the
    button. Tiles are a fixed width so the codes cannot balloon on a wide
    screen; they only ever need to clear their decode floor, not fill the row. */
-.coverfoot{display:flex; flex-direction:column; gap:11px; align-self:flex-start;
+.coverfoot{display:flex; flex-direction:column; gap:7px; align-self:flex-start;
            max-width:100%; background:var(--black-soft); border:1px solid #333333;
-           border-left:3px solid var(--red); border-radius:2px; padding:13px 14px}
+           border-left:3px solid var(--red); border-radius:2px; padding:9px 11px}
 .ladbar{padding:0}
-.ladbar b{font-family:var(--cond); font-weight:700; color:var(--gray-light);
-          font-size:clamp(11px,1.3vw,13px); letter-spacing:.13em; text-transform:uppercase;
+.ladbar b{font-family:var(--cond); font-weight:700; color:#DDDDDD;
+          font-size:clamp(12.5px,1.45vw,14.5px); letter-spacing:.11em; text-transform:uppercase;
           line-height:1.35}
-.ladname{display:block; color:var(--white); font-size:clamp(14px,1.7vw,17.5px);
-         letter-spacing:.07em; white-space:nowrap}
+.ladname{display:block; color:var(--white); font-size:clamp(13.5px,1.6vw,16px);
+         letter-spacing:.07em; white-space:nowrap; margin-top:1px}
 /* the codes sit well apart so a camera cannot take in both at once and
    open the wrong game */
 .tiles{display:flex; flex-wrap:nowrap; gap:clamp(34px,9vw,52px); align-items:flex-start}
 .tile{flex:0 1 112px; max-width:112px; min-width:0; display:flex; flex-direction:column; text-decoration:none}
-.tile img{width:100%; height:auto; display:block; background:#FFFFFF; padding:4px;
+.tile img{width:100%; height:auto; display:block; background:#FFFFFF; padding:3px;
           border-radius:2px 2px 0 0;
           image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
 .lbl{display:block; text-align:center; font-family:var(--cond); font-weight:700;
      font-size:clamp(11.5px,1.35vw,13.5px); letter-spacing:.07em; text-transform:uppercase;
-     color:#FFFFFF; background:var(--red); padding:9px 6px; border-radius:0 0 2px 2px;
-     line-height:1.28}
+     color:#FFFFFF; background:var(--red); padding:7px 5px; border-radius:0 0 2px 2px;
+     line-height:1.25}
 .tile:hover .lbl{background:var(--red-dark)}
 
 /* ---- tape photography ------------------------------------------------- */
@@ -215,14 +222,14 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 }
 #bar button,#bar a{font-family:var(--cond); font-weight:700; letter-spacing:.1em; text-transform:uppercase}
 .navbtn{
-  flex:0 0 auto; width:42px; height:42px; border-radius:2px; cursor:pointer;
+  flex:0 0 auto; width:38px; height:38px; border-radius:2px; cursor:pointer;
   background:transparent; border:1px solid #3E3E3E; color:var(--white);
   font-size:22px; line-height:1; display:flex; align-items:center; justify-content:center;
 }
 .navbtn:hover:not(:disabled){background:var(--red); border-color:var(--red)}
 .navbtn:disabled{opacity:.32; cursor:default}
 /* forward is the action almost everyone wants, so it is filled, not outlined */
-#next:not(:disabled){background:var(--red); border-color:var(--red); width:48px; font-size:24px}
+#next:not(:disabled){background:var(--red); border-color:var(--red); width:44px; font-size:22px}
 #next:not(:disabled):hover{background:var(--red-dark); border-color:var(--red-dark)}
 #where{
   flex:1 1 auto; min-width:0; display:flex; align-items:baseline; gap:11px;
@@ -233,7 +240,7 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 #where .ttl{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; letter-spacing:.06em}
 #enquire{
   flex:0 0 auto; background:var(--wa); color:#0B2E17; text-decoration:none;
-  padding:12px 17px; border-radius:2px; font-size:13.5px; display:inline-flex; align-items:center; gap:8px;
+  padding:10px 15px; border-radius:2px; font-size:13.5px; display:inline-flex; align-items:center; gap:8px;
 }
 #enquire:hover{filter:brightness(1.08)}
 #enquire svg{width:16px; height:16px; flex:0 0 auto}
@@ -274,10 +281,10 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   .g5 .card figure{aspect-ratio:16/10}
 }
 @media (max-width:560px){
-  :root{--bar:70px}
+  :root{--bar:58px}
   .g2,.g3,.g5{grid-template-columns:1fr}
   .phototrio{grid-template-columns:repeat(2,1fr); gap:14px}
-  .coverfoot{align-self:flex-start; padding:12px}
+  .coverfoot{align-self:flex-start; padding:9px 10px}
   #where .ttl{display:none}
   .game{flex-direction:column; align-items:flex-start}
   .stats{gap:14px}
@@ -300,6 +307,10 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
     <div>
       <p class="eyebrow">Aashirwad Tapes Industries &middot; DEFIGO Brand</p>
       <h1>BUILT TO<br><span class="accent">BOND.</span><br>MADE TO LAST.</h1>
+      <a class="cta" id="enquireCover" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.24-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.55-.43h-.47c-.16 0-.42.06-.64.31-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.17 1.69 2.58 4.1 3.62.57.25 1.02.39 1.37.5.57.18 1.1.16 1.51.1.46-.07 1.42-.58 1.62-1.15.2-.56.2-1.05.14-1.15-.06-.1-.22-.16-.47-.28z"/></svg>
+        Enquire on WhatsApp
+      </a>
       <p class="lede">Industrial adhesive tapes manufactured in Kundli, Sonipat &mdash; for EV battery and
         e&#8209;powertrain, white goods, HVAC, automotive, construction and packaging.</p>
       <div class="factbar">
@@ -667,9 +678,12 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
     title.textContent = nameOf(cur);
     prev.disabled = (cur === 0);
     next.disabled = (cur === total - 1);
-    enquire.href = 'https://wa.me/' + AASHIRWAD_WA + '?text=' + encodeURIComponent(
+    var link = 'https://wa.me/' + AASHIRWAD_WA + '?text=' + encodeURIComponent(
       'Hi Aashirwad Tapes — I am browsing your 2026 catalogue. ' +
       'I would like a quote on: ' + askOf(cur) + '.');
+    enquire.href = link;
+    var coverCta = document.getElementById('enquireCover');
+    if (coverCta) coverCta.href = link;
     var kids = ixgrid.children;
     for (var i = 0; i < kids.length; i++) {
       kids[i].classList.toggle('cur', i === cur);
