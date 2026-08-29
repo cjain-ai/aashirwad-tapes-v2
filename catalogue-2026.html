@@ -27,7 +27,7 @@
   --white:#FFFFFF; --white-off:#F5F5F5; --white-dim:#E8E8E8;
   --gray:#888888; --gray-light:#CCCCCC;
   --wa:#25D366;
-  --bar:62px;
+  --bar:0px;
   --pad:clamp(22px,5vw,80px);
   --display:'Bebas Neue',Impact,sans-serif;
   --cond:'Barlow Condensed','Arial Narrow',sans-serif;
@@ -53,7 +53,7 @@ body{
 .slide{
   flex:0 0 100%; width:100%; height:100dvh;
   scroll-snap-align:start; scroll-snap-stop:always;
-  padding:var(--pad) var(--pad) calc(var(--bar) + var(--pad));
+  padding:var(--pad);
   display:flex; flex-direction:column; justify-content:safe center;
   position:relative; overflow-y:auto; overflow-x:hidden;
   scrollbar-width:thin;
@@ -70,11 +70,25 @@ body{
   margin:0 0 14px;
 }
 .slide.dark .eyebrow{color:var(--red-light)}
+.brandline{font-size:clamp(16px,2.5vw,23px); letter-spacing:.1em; line-height:1.3; margin-bottom:16px}
 h1,h2{font-family:var(--display); font-weight:400; margin:0; line-height:.94; letter-spacing:1px; text-wrap:balance}
 h1{font-size:clamp(36px,6vw,72px)}
 h2{font-size:clamp(34px,5.6vw,68px)}
 h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); margin:0 0 6px; letter-spacing:.01em}
 .accent{color:var(--red)}
+/* links carry a visible underline so they read as links, not as styling */
+.ln{color:inherit; text-decoration:underline; text-decoration-thickness:1.5px;
+    text-underline-offset:3px; text-decoration-skip-ink:auto}
+.ln:hover{color:var(--red-light); text-decoration-thickness:2px}
+.ln:focus-visible{outline:2px solid var(--red-light); outline-offset:2px}
+/* a small way to reach Live AI Dream, at the point the credit is given */
+.slide.endpage{justify-content:flex-start; padding-bottom:calc(var(--pad) * .6)}
+.wa-mini{display:inline-flex; align-items:center; justify-content:center; vertical-align:-5px;
+         width:26px; height:26px; margin-left:4px; border-radius:50%;
+         background:var(--wa); color:#0B2E17; text-decoration:none}
+.wa-mini:hover{filter:brightness(1.09)}
+.wa-mini svg{width:16px; height:16px}
+a.ladname{display:block; margin-top:1px}
 .lede{font-size:clamp(16px,2.1vw,22px); font-weight:500; line-height:1.5; max-width:60ch; color:#333333; margin:18px 0 0}
 .body{font-size:clamp(14px,1.5vw,16.5px); font-weight:500; line-height:1.6; max-width:64ch; color:#3A3A3A; margin:12px 0 0}
 .rule{height:4px; width:78px; background:var(--red); margin:0 0 22px; border:0}
@@ -146,31 +160,42 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 /* ---- cover: logo tight to the top, credit strip pinned low ------------ */
 .slide.cover{justify-content:space-between; gap:clamp(14px,2.4vh,24px);
              padding-top:clamp(16px,3vh,34px);
-             padding-bottom:calc(var(--bar) + 6px)}
-/* three labelled codes in one box: scan one, or tap it -- the label is the
-   button. Tiles are a fixed width so the codes cannot balloon on a wide
-   screen; they only ever need to clear their decode floor, not fill the row. */
-.coverfoot{display:flex; flex-direction:column; gap:7px; align-self:flex-start;
-           max-width:100%; background:var(--black-soft); border:1px solid #333333;
-           border-left:3px solid var(--red); border-radius:2px; padding:9px 11px}
-.ladbar{padding:0}
-.ladbar b{font-family:var(--cond); font-weight:700; color:#DDDDDD;
-          font-size:clamp(12.5px,1.45vw,14.5px); letter-spacing:.11em; text-transform:uppercase;
-          line-height:1.35}
-.ladname{display:block; color:var(--white); font-size:clamp(13.5px,1.6vw,16px);
-         letter-spacing:.07em; white-space:nowrap; margin-top:1px}
-/* the codes sit well apart so a camera cannot take in both at once and
-   open the wrong game */
-.tiles{display:flex; flex-wrap:nowrap; gap:clamp(34px,9vw,52px); align-items:flex-start}
-.tile{flex:0 1 112px; max-width:112px; min-width:0; display:flex; flex-direction:column; text-decoration:none}
-.tile img{width:100%; height:auto; display:block; background:#FFFFFF; padding:3px;
+             padding-bottom:var(--pad)}
+/* the credit sits between the two codes: it reads at a usable size there,
+   and it holds the codes apart so a camera takes in one at a time */
+.coverfoot{display:flex; flex-direction:row; align-items:center; gap:11px;
+           margin-top:auto; align-self:flex-start; max-width:100%; background:var(--black-soft);
+           border:1px solid #333333; border-left:3px solid var(--red);
+           border-radius:2px; padding:7px 12px}
+.ladbar{flex:1 1 auto; min-width:0; text-align:center; padding:0}
+.ladrole{display:block; font-family:var(--cond); font-weight:700; color:#DDDDDD;
+         font-size:clamp(12.5px,1.45vw,14.5px); letter-spacing:.08em; text-transform:uppercase;
+         line-height:1.3}
+.ladname{display:block; margin-top:5px; color:var(--white); font-family:var(--cond);
+         font-weight:700; font-size:clamp(16px,2vw,20px); letter-spacing:.06em;
+         text-transform:uppercase; line-height:1.2}
+.tiles{display:contents}
+.tile{flex:0 0 auto; width:clamp(92px,23vw,102px); display:flex; flex-direction:column;
+      text-decoration:none}
+.tile img{width:100%; height:auto; display:block; background:#FFFFFF; padding:2px;
           border-radius:2px 2px 0 0;
           image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
 .lbl{display:block; text-align:center; font-family:var(--cond); font-weight:700;
-     font-size:clamp(11.5px,1.35vw,13.5px); letter-spacing:.07em; text-transform:uppercase;
-     color:#FFFFFF; background:var(--red); padding:7px 5px; border-radius:0 0 2px 2px;
-     line-height:1.25}
+     font-size:clamp(12px,1.45vw,14px); letter-spacing:.05em; text-transform:uppercase;
+     color:#FFFFFF; background:var(--red); padding:5px 4px; border-radius:0 0 2px 2px;
+     line-height:1.2}
 .tile:hover .lbl{background:var(--red-dark)}
+
+/* the range pages: a tape and its name, nothing else */
+.range{display:grid; grid-template-columns:repeat(5,1fr); gap:clamp(12px,2vw,22px); margin-top:28px}
+.range figure{margin:0}
+.range img{width:100%; aspect-ratio:1/1; object-fit:cover; display:block; border-radius:2px;
+           background:var(--white-off)}
+.slide.dark .range img{background:var(--black-mid)}
+.range figcaption{margin-top:10px; font-family:var(--cond); font-weight:700;
+                  font-size:clamp(12px,1.35vw,14.5px); letter-spacing:.05em; line-height:1.3}
+@media (max-width:900px){ .range{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:560px){ .range{grid-template-columns:repeat(2,1fr); gap:13px} }
 
 /* ---- tape photography ------------------------------------------------- */
 .phototrio{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:26px}
@@ -182,9 +207,9 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 .phototrio span{display:block; font-size:13px; font-weight:500; color:#444444; margin-top:2px; line-height:1.4}
 
 /* ---- games ----------------------------------------------------------- */
-.game{display:flex; gap:16px; align-items:center; background:var(--black-soft);
+.game{display:flex; gap:14px; align-items:center; background:var(--black-soft);
       border:1px solid #333333; border-radius:2px; padding:16px}
-.game img.qr{width:clamp(132px,17vw,164px); height:auto; border-radius:2px; background:#FFFFFF;
+.game img.qr{width:clamp(96px,26vw,150px); height:auto; border-radius:2px; background:#FFFFFF;
              padding:8px; flex:0 0 auto;
              image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
 .game .gt{min-width:0}
@@ -214,42 +239,48 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 
 /* ---- fixed bottom bar ------------------------------------------------- */
 #bar{
-  position:fixed; left:0; right:0; bottom:0; height:var(--bar); z-index:40;
-  display:flex; align-items:center; gap:10px; padding:0 clamp(12px,3vw,26px);
-  padding-bottom:env(safe-area-inset-bottom);
-  background:rgba(17,17,17,.94); backdrop-filter:blur(10px);
-  border-top:1px solid #2E2E2E; color:var(--white);
+  position:fixed; top:0; right:0; z-index:40;
+  display:flex; align-items:center;
+  padding:calc(var(--pad) * .5) var(--pad) 0 0;
+  background:none; border:0; color:var(--white);
 }
 #bar button,#bar a{font-family:var(--cond); font-weight:700; letter-spacing:.1em; text-transform:uppercase}
 .navbtn{
-  flex:0 0 auto; width:38px; height:38px; border-radius:2px; cursor:pointer;
+  flex:0 0 auto; width:32px; height:32px; border-radius:2px; cursor:pointer;
   background:transparent; border:1px solid #3E3E3E; color:var(--white);
-  font-size:22px; line-height:1; display:flex; align-items:center; justify-content:center;
+  font-size:18px; line-height:1; display:flex; align-items:center; justify-content:center;
 }
 .navbtn:hover:not(:disabled){background:var(--red); border-color:var(--red)}
 .navbtn:disabled{opacity:.32; cursor:default}
+/* the arrows ride at half height on the edges, where a thumb reaches them
+   and they read as "the deck moves sideways" */
+/* bare yellow chevrons -- a filled button disappeared against the dark pages.
+   The dark halo under each stroke keeps them legible on the white pages too,
+   since these sit over all fourteen. */
+#prev,#next{position:fixed; top:50%; transform:translateY(-50%); z-index:41;
+            width:38px; height:46px; border:0; background:none; padding:0;
+            border-radius:0; backdrop-filter:none}
+#prev:hover:not(:disabled),#next:hover:not(:disabled){background:none}
+#prev svg,#next svg{width:28px; height:28px; display:block; margin:0 auto}
+#prev:hover:not(:disabled) svg,#next:hover:not(:disabled) svg{transform:scale(1.14)}
+#prev{left:2px}
+#next{right:2px}
 /* forward is the action almost everyone wants, so it is filled, not outlined */
-#next:not(:disabled){background:var(--red); border-color:var(--red); width:44px; font-size:22px}
+
 #next:not(:disabled):hover{background:var(--red-dark); border-color:var(--red-dark)}
 #where{
-  flex:1 1 auto; min-width:0; display:flex; align-items:baseline; gap:11px;
-  background:transparent; border:0; color:var(--white); cursor:pointer;
-  font-size:13px; padding:6px 4px; text-align:left;
+  display:flex; align-items:baseline; gap:9px; cursor:pointer;
+  background:transparent; border:0; color:var(--white);
+  font-size:13px; padding:5px 2px; text-align:right;
 }
-#where .num{color:var(--red); font-size:14.5px; flex:0 0 auto}
-#where .ttl{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; letter-spacing:.06em}
-#enquire{
-  flex:0 0 auto; background:var(--wa); color:#0B2E17; text-decoration:none;
-  padding:10px 15px; border-radius:2px; font-size:13.5px; display:inline-flex; align-items:center; gap:8px;
-}
-#enquire:hover{filter:brightness(1.08)}
-#enquire svg{width:16px; height:16px; flex:0 0 auto}
-
+#where .num{color:var(--red-light); font-size:15px; flex:0 0 auto; letter-spacing:.05em}
+.slide:not(.dark) ~ #bar .num{color:var(--red)}
+#where .ttl{display:none}
 /* ---- slide index ------------------------------------------------------ */
 #index{
   position:fixed; inset:0; z-index:50; background:var(--black);
   display:none; flex-direction:column; padding:clamp(18px,4vw,46px);
-  padding-bottom:calc(var(--bar) + 20px); overflow-y:auto; color:var(--white);
+  padding-bottom:var(--pad); overflow-y:auto; color:var(--white);
 }
 #index.open{display:flex}
 #index h4{font-family:var(--cond); font-weight:700; letter-spacing:.2em; text-transform:uppercase;
@@ -281,17 +312,28 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   .g5 .card figure{aspect-ratio:16/10}
 }
 @media (max-width:560px){
-  :root{--bar:58px}
+
   .g2,.g3,.g5{grid-template-columns:1fr}
   .phototrio{grid-template-columns:repeat(2,1fr); gap:14px}
-  .coverfoot{align-self:flex-start; padding:9px 10px}
+  .coverfoot{align-self:flex-start; padding:8px 9px}
   #where .ttl{display:none}
-  .game{flex-direction:column; align-items:flex-start}
+
   .stats{gap:14px}
 }
 @media (max-height:560px){
   .lede{font-size:15px} .card p{font-size:12.5px}
 }
+.sitecta{display:inline-flex; flex-direction:column; gap:5px; align-self:flex-start;
+         margin-top:30px; text-decoration:none; border:2px solid var(--red);
+         border-radius:2px; padding:16px 22px; background:none}
+.sitecta:hover{background:var(--red)}
+.sitecta-k{font-family:var(--cond); font-weight:700; font-size:clamp(11.5px,1.3vw,13px);
+           letter-spacing:.19em; text-transform:uppercase; color:var(--red)}
+.sitecta:hover .sitecta-k,.sitecta:hover .sitecta-u{color:#FFFFFF}
+.sitecta-u{font-family:var(--display); font-weight:400; font-size:clamp(24px,3.6vw,38px);
+           letter-spacing:.5px; color:var(--black); line-height:1}
+.endcredit{margin-top:auto; margin-bottom:0; padding-top:26px}
+
 @media (prefers-reduced-motion:reduce){
   #deck{scroll-behavior:auto}
 }
@@ -305,9 +347,9 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   <section class="slide dark cover" data-t="Product catalogue 2026" data-ask="the DEFIGO range">
     <img class="mark" src="assets/logo.png" alt="Aashirwad Tapes">
     <div>
-      <p class="eyebrow">Aashirwad Tapes Industries &middot; DEFIGO Brand</p>
+      <p class="eyebrow brandline"><a class="ln" href="https://aashirwadtapes.com" rel="noopener">Aashirwad Tapes Industries</a><br>DEFIGO Brand</p>
       <h1>BUILT TO<br><span class="accent">BOND.</span><br>MADE TO LAST.</h1>
-      <a class="cta" id="enquireCover" href="#" target="_blank" rel="noopener">
+      <a class="cta" id="enquireCover" href="#" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.24-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.55-.43h-.47c-.16 0-.42.06-.64.31-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.17 1.69 2.58 4.1 3.62.57.25 1.02.39 1.37.5.57.18 1.1.16 1.51.1.46-.07 1.42-.58 1.62-1.15.2-.56.2-1.05.14-1.15-.06-.1-.22-.16-.47-.28z"/></svg>
         Enquire on WhatsApp
       </a>
@@ -323,20 +365,18 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
     <!-- The credit and the games sit on the cover, not only on the closing
          slide, because most readers never reach the last page. -->
     <div class="coverfoot">
+      <a class="tile" href="https://liveaidream.com/go/aashirwad-ar" rel="noopener">
+        <img src="assets/qr-ar.png" alt="QR code to play Tape AR" loading="lazy">
+        <span class="lbl">Play Tape AR</span>
+      </a>
       <div class="ladbar">
-        <b>Marketing strategy &amp; execution partner
-           <span class="ladname">Live AI Dream</span></b>
+        <span class="ladrole">Marketing strategy<br>&amp; execution partner</span>
+        <a class="ln ladname" href="https://liveaidream.com" rel="noopener">Live AI Dream</a>
       </div>
-      <div class="tiles">
-        <a class="tile" href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">
-          <img src="assets/qr-ar.png" alt="QR code to play the AR Tape Game" loading="lazy">
-          <span class="lbl">Play AR Tape Game</span>
-        </a>
-        <a class="tile" href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">
-          <img src="assets/qr-run.png" alt="QR code to play Tape Roll Out" loading="lazy">
-          <span class="lbl">Play Tape Roll Out</span>
-        </a>
-      </div>
+      <a class="tile" href="https://liveaidream.com/go/aashirwad-run" rel="noopener">
+        <img src="assets/qr-run.png" alt="QR code to play Tape Roll" loading="lazy">
+        <span class="lbl">Play Tape Roll</span>
+      </a>
     </div>
 
   </section>
@@ -345,7 +385,7 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   <section class="slide" data-t="What a tape does" data-ask="the DEFIGO range">
     <p class="eyebrow">DEFIGO &middot; Manufactured at Kundli, Sonipat</p>
     <hr class="rule">
-    <h2>FOUR JOBS.<br><span class="accent">ONE SUPPLIER.</span></h2>
+    <h2>FOUR JOBS.<br><span class="accent">ONE TAPE EACH.</span></h2>
     <div class="phototrio">
       <figure>
         <img src="assets/tape-polyimide.webp" alt="Thin film insulation tape" loading="lazy">
@@ -421,199 +461,127 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
     </div>
   </section>
 
-  <!-- 06 ---------------------------------------------------------------- -->
-  <section class="slide" data-t="The EV tapes" data-ask="the DEFIGO EV tape range">
-    <p class="eyebrow">Priority range &middot; 03</p>
+  <section class="slide" data-t="EV battery & e-powertrain" data-ask="EV battery and e-powertrain tapes">
+    <p class="eyebrow">Priority range</p>
     <hr class="rule">
-    <h2>THE <span class="accent">DEFIGO</span> EV RANGE.</h2>
-    <div class="grid g5">
-      <div class="card"><figure><img src="assets/tape-polyimide.webp" alt="Electrical insulation tape" loading="lazy"></figure>
-        <div class="k">Insulate</div><h3>Electrical Insulation Tapes</h3>
-        <p>Thin film carrier. A clean electrical barrier that conforms around edges and corners.</p></div>
-      <div class="card"><figure><img src="assets/tape-glasscloth.webp" alt="High-temperature glass-cloth tape" loading="lazy"></figure>
-        <div class="k">Protect</div><h3>High&#8209;Temperature Glass&#8209;Cloth</h3>
-        <p>Woven glass&#8209;cloth carrier. Heat resistant, holds up through hot processing.</p></div>
-      <div class="card"><figure><img src="assets/tape-fleece.webp" alt="Wire harness and cable protection tape" loading="lazy"></figure>
-        <div class="k">Protect</div><h3>Wire&#8209;Harness &amp; Cable</h3>
-        <p>Fleece or cloth carrier. Bundles and wraps a loom with abrasion protection.</p></div>
-      <div class="card"><figure><img src="assets/tape-foam.webp" alt="Foam sealing and damping tape" loading="lazy"></figure>
-        <div class="k">Seal</div><h3>Foam Sealing &amp; Damping</h3>
-        <p>Closed&#8209;cell foam. Seals gaps, cushions components, damps vibration in panels.</p></div>
-      <div class="card"><figure><img src="assets/tape-polyester.webp" alt="Green polyester process-masking tape" loading="lazy"></figure>
-        <div class="k">Bond</div><h3>Polyester Process&#8209;Masking</h3>
-        <p>Polyester carrier for finishing and process steps. Removes cleanly after the operation.</p></div>
-    </div>
-    <p class="body">Full specifications, carrier thickness and width on request from the sales team.</p>
-  </section>
-
-  <!-- 07 ---------------------------------------------------------------- -->
-  <section class="slide alt" data-t="White goods &amp; appliance" data-ask="white goods and appliance tapes">
-    <p class="eyebrow">Range &middot; White goods &amp; appliance</p>
-    <hr class="rule">
-    <h2>INSIDE THE<br>APPLIANCE.</h2>
-    <p class="lede">Venting, holding and foil tapes for refrigeration, washing machines and
-      air&#8209;conditioning assemblies.</p>
-    <div class="rows">
-      <div class="row"><span class="nm">Air Permeability &amp; Venting Tape</span><span class="ct">White goods</span></div>
-      <div class="row"><span class="nm">Component Holding Tape</span><span class="ct">White goods</span></div>
-      <div class="row"><span class="nm">Aluminium Foil Tape</span><span class="ct">White goods / HVAC</span></div>
-      <div class="row"><span class="nm">PE Foam Tapes (Appliance Grade)</span><span class="ct">White goods</span></div>
-      <div class="row"><span class="nm">Double&#8209;Sided Tissue Tape</span><span class="ct">Bonding</span></div>
+    <h2>EV BATTERY &AMP; E-POWERTRAIN.</h2>
+    <div class="range">
+      <figure>
+        <img src="assets/tape-polyimide.webp" alt="Electrical Insulation">
+        <figcaption>Electrical Insulation</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/tape-glasscloth.webp" alt="High-Temperature Glass-Cloth">
+        <figcaption>High-Temperature Glass-Cloth</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/tape-fleece.webp" alt="Wire-Harness and Cable">
+        <figcaption>Wire-Harness &amp; Cable</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/tape-foam.webp" alt="Foam Sealing and Damping">
+        <figcaption>Foam Sealing &amp; Damping</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/tape-polyester.webp" alt="Polyester Process-Masking">
+        <figcaption>Polyester Process-Masking</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- 08 ---------------------------------------------------------------- -->
-  <section class="slide" data-t="Foam, polyester &amp; bonding" data-ask="foam, polyester and bonding tapes">
-    <p class="eyebrow">Range &middot; Foam, polyester &amp; bonding</p>
+  <section class="slide alt" data-t="White goods & HVAC" data-ask="white goods and HVAC tapes">
+    <p class="eyebrow">Range</p>
     <hr class="rule">
-    <h2>SEAL IT.<br><span class="accent">BOND IT.</span></h2>
-    <div class="rows">
-      <div class="row"><span class="nm">EVA Foam Tape (Single &amp; Double Sided)</span><span class="ct">Foam</span></div>
-      <div class="row"><span class="nm">PE Foam Tape (Single &amp; Double Sided)</span><span class="ct">Foam</span></div>
-      <div class="row"><span class="nm">EPDM Foam Tape (Glazing Tape)</span><span class="ct">Foam</span></div>
-      <div class="row"><span class="nm">PU Foam Tape</span><span class="ct">Foam</span></div>
-      <div class="row"><span class="nm">Red Polyester Tape</span><span class="ct">Polyester</span></div>
-      <div class="row"><span class="nm">Single Sided Polyester Tape</span><span class="ct">Polyester</span></div>
-      <div class="row"><span class="nm">Double Sided Polyester Tape (Red &amp; White)</span><span class="ct">Polyester</span></div>
-      <div class="row"><span class="nm">High Temperature Polyester Tape</span><span class="ct">Polyester</span></div>
-      <div class="row"><span class="nm">Double&#8209;Sided Cloth Tape</span><span class="ct">Bonding</span></div>
+    <h2>WHITE GOODS &AMP; HVAC.</h2>
+    <div class="range">
+      <figure>
+        <img src="assets/p/air-vent.webp" alt="Air Permeability and Venting">
+        <figcaption>Air Permeability &amp; Venting</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/p/component-holding.webp" alt="Component Holding">
+        <figcaption>Component Holding</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/p/aluminium-foil.webp" alt="Aluminium Foil">
+        <figcaption>Aluminium Foil</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/p/pe-foam-wg.webp" alt="PE Foam (Appliance Grade)">
+        <figcaption>PE Foam (Appliance Grade)</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- 09 ---------------------------------------------------------------- -->
-  <section class="slide alt" data-t="Packaging, kraft &amp; filament" data-ask="packaging, kraft and filament tapes">
-    <p class="eyebrow">Range &middot; Packaging, kraft &amp; filament</p>
+  <section class="slide" data-t="Polyester tapes" data-ask="polyester tapes">
+    <p class="eyebrow">Range</p>
     <hr class="rule">
-    <h2>CLOSE IT.<br>SHIP IT.</h2>
-    <div class="rows">
-      <div class="row"><span class="nm">BOPP Packaging Tapes</span><span class="ct">Packaging</span></div>
-      <div class="row"><span class="nm">Self&#8209;Adhesive Kraft Paper Tape</span><span class="ct">Kraft paper</span></div>
-      <div class="row"><span class="nm">Water&#8209;Activated Kraft Paper Tape (KP&#8209;90)</span><span class="ct">Kraft paper</span></div>
-      <div class="row"><span class="nm">Reinforced Kraft Paper Tape</span><span class="ct">Kraft paper</span></div>
-      <div class="row"><span class="nm">Cross Filament Tape</span><span class="ct">Filament</span></div>
-      <div class="row"><span class="nm">Mono Filament Tape</span><span class="ct">Filament</span></div>
-      <div class="row"><span class="nm">Cloth Duct Tape</span><span class="ct">Duct tape</span></div>
-      <div class="row"><span class="nm">HDPE Tape</span><span class="ct">Specialty</span></div>
+    <h2>POLYESTER TAPES.</h2>
+    <div class="range">
+      <figure>
+        <img src="assets/p/red-polyester.webp" alt="Red Polyester">
+        <figcaption>Red Polyester</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/p/ss-polyester.webp" alt="Single Sided Polyester">
+        <figcaption>Single Sided Polyester</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/p/ds-polyester.webp" alt="Double Sided Polyester">
+        <figcaption>Double Sided Polyester</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/p/hi-temp-polyester.webp" alt="High Temperature Polyester">
+        <figcaption>High Temperature Polyester</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- 10 ---------------------------------------------------------------- -->
-  <section class="slide" data-t="Construction, masking &amp; safety" data-ask="construction, masking and safety tapes">
-    <p class="eyebrow">Range &middot; Construction, masking &amp; safety</p>
+  <section class="slide alt" data-t="Bonding, packaging & safety" data-ask="bonding, packaging and safety tapes">
+    <p class="eyebrow">Range</p>
     <hr class="rule">
-    <h2>ON SITE.<br><span class="accent">ON THE LINE.</span></h2>
-    <div class="rows">
-      <div class="row"><span class="nm">Masking Tapes</span><span class="ct">Masking</span></div>
-      <div class="row"><span class="nm">Roller Masking Tape</span><span class="ct">Painting &amp; finishing</span></div>
-      <div class="row"><span class="nm">Slab Cast Shuttering Tape</span><span class="ct">Construction</span></div>
-      <div class="row"><span class="nm">Dry Wall Joint Tape</span><span class="ct">Construction</span></div>
-      <div class="row"><span class="nm">Mirror Mounting Tape</span><span class="ct">Mirror mounting</span></div>
-      <div class="row"><span class="nm">Heat Sealing Tape (Teflon / PTFE)</span><span class="ct">Specialty</span></div>
-      <div class="row"><span class="nm">Tesa&reg; 60950 Anti&#8209;Slip Tape</span><span class="ct">Safety</span></div>
+    <h2>BONDING, PACKAGING &AMP; SAFETY.</h2>
+    <div class="range">
+      <figure>
+        <img src="assets/p/ds-tissue.webp" alt="Double-Sided Tissue">
+        <figcaption>Double-Sided Tissue</figcaption>
+      </figure>
+
+      <figure>
+        <img src="assets/p/bopp.webp" alt="BOPP Packaging">
+        <figcaption>BOPP Packaging</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/p/masking.webp" alt="Masking Tapes">
+        <figcaption>Masking Tapes</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/p/anti-skid.webp" alt="Tesa 60950 Anti-Slip">
+        <figcaption>Tesa&reg; 60950 Anti-Slip</figcaption>
+      </figure>
     </div>
   </section>
 
   <!-- 11 ---------------------------------------------------------------- -->
-  <section class="slide dark" data-t="Authorised TESA distributor" data-ask="TESA products">
-    <p class="eyebrow">Partnership</p>
-    <hr class="rule">
-    <h2>OUR OWN BRAND,<br>AND <span class="accent">TESA</span> WHEN<br>THE JOB CALLS FOR IT.</h2>
-    <p class="lede">Aashirwad is an authorised TESA distributor. Where an application needs a specified
-      TESA product, you get it from the same supplier, on the same order.</p>
-    <div class="grid g3">
-      <div class="card"><div class="k">High bond</div><h3>Tesa&reg; ACXplus</h3>
-        <p>Industrial high&#8209;bond tape for structural bonding where fasteners are not wanted.</p></div>
-      <div class="card"><div class="k">Mounting</div><h3>Tesa&reg; Powerbond</h3>
-        <p>Mirror mounting, for fixings that have to stay put on a finished surface.</p></div>
-      <div class="card"><div class="k">Safety</div><h3>Tesa&reg; 60950</h3>
-        <p>Anti&#8209;slip tape for steps, walkways and working platforms.</p></div>
-    </div>
-  </section>
-
   <!-- 12 ---------------------------------------------------------------- -->
-  <section class="slide alt" data-t="At a glance" data-ask="the DEFIGO range">
+  <section class="slide alt endpage" data-t="At a glance" data-ask="the DEFIGO range">
     <p class="eyebrow">At a glance</p>
     <hr class="rule">
     <h2>THE WHOLE<br>RANGE.</h2>
-    <p class="lede">Sixteen categories, forty&#8209;plus products, one supplier.</p>
-    <div class="chips">
-      <span class="chip">EV battery &amp; e&#8209;powertrain</span><span class="chip">White goods</span>
-      <span class="chip">HVAC</span><span class="chip">Polyester tapes</span>
-      <span class="chip">Foam tapes</span><span class="chip">Kraft paper tapes</span>
-      <span class="chip">Filament tapes</span><span class="chip">Mirror mounting</span>
-      <span class="chip">Construction</span><span class="chip">Masking</span>
-      <span class="chip">Painting &amp; finishing</span><span class="chip">Packaging</span>
-      <span class="chip">Duct tape</span><span class="chip">High&#8209;bond industrial</span>
-      <span class="chip">Bonding</span><span class="chip">Safety</span>
-    </div>
-    <p class="body">Not listing what you need? We make to the carrier, adhesive and width the
-      application requires. Send us the application and we will come back with a recommendation.</p>
+    <p class="lede">Forty&#8209;plus products across sixteen categories &mdash; every one of them,
+      with specifications, on the website.</p>
+    <a class="sitecta" href="https://aashirwadtapes.com" rel="noopener">
+      <span class="sitecta-k">See the full range</span>
+      <span class="sitecta-u">aashirwadtapes.com</span>
+    </a>
+
+    <p class="body endcredit">Built for Aashirwad Tapes by
+      <a class="ln" href="https://liveaidream.com" rel="noopener">Live AI Dream</a>
+      <a class="wa-mini" id="ladwa" href="#" rel="noopener"
+         aria-label="Message Live AI Dream on WhatsApp" title="Message Live AI Dream on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.24-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.55-.43h-.47c-.16 0-.42.06-.64.31-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.17 1.69 2.58 4.1 3.62.57.25 1.02.39 1.37.5.57.18 1.1.16 1.51.1.46-.07 1.42-.58 1.62-1.15.2-.56.2-1.05.14-1.15-.06-.1-.22-.16-.47-.28z"/></svg></a></p>
   </section>
 
   <!-- 13 ---------------------------------------------------------------- -->
-  <section class="slide dark" data-t="Try it at the stand" data-ask="the DEFIGO range">
-    <p class="eyebrow">At the stand</p>
-    <hr class="rule">
-    <h2>TWO MINUTES.<br>ONE <span class="accent">PHONE.</span></h2>
-    <p class="lede">Scan and play &mdash; no app, no download. Built for Aashirwad by Live AI Dream.</p>
-    <div class="grid g2">
-      <div class="game">
-        <img class="qr" src="assets/qr-ar.png" alt="QR code to play the AR Tape Game" loading="lazy">
-        <div class="gt">
-          <div class="card-k" style="font-family:var(--cond);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--red)">AR experience</div>
-          <h3>AR Tape Game</h3>
-          <p style="margin:6px 0 0;font-size:14px;color:var(--gray-light);line-height:1.5">
-            Point the camera, throw a roll, hit the target before the clock runs out.</p>
-          <a class="play" href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">Play now</a>
-        </div>
-      </div>
-      <div class="game">
-        <img class="qr" src="assets/qr-run.png" alt="QR code to play Tape Roll Out" loading="lazy">
-        <div class="gt">
-          <div class="card-k" style="font-family:var(--cond);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--red)">Arcade</div>
-          <h3>Tape Roll Out</h3>
-          <p style="margin:6px 0 0;font-size:14px;color:var(--gray-light);line-height:1.5">
-            Run the line, clear the walls, keep the roll moving for sixty seconds.</p>
-          <a class="play" href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">Play now</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 14 ---------------------------------------------------------------- -->
-  <section class="slide dark" data-t="Built by Live AI Dream" data-ask="the DEFIGO range">
-    <img class="mark" src="assets/lad-mark.webp" alt="Live AI Dream" loading="lazy">
-    <p class="eyebrow" style="margin-top:18px">Marketing strategy &amp; execution partner</p>
-    <hr class="rule">
-    <h2>EVERYTHING YOU JUST SAW<br>WAS BUILT BY<br><span class="accent">LIVE AI DREAM.</span></h2>
-    <p class="lede">Strategy, design, build and the experiences on the stand &mdash; one team,
-      end to end, for a manufacturer selling B2B.</p>
-    <div class="work">
-      <div class="w"><b>Marketing strategy</b><span>Positioning, priority range and the story the stand tells.</span></div>
-      <div class="w"><b>Stall &amp; exhibition design</b><span>Stand layout, panels, banners and print artwork.</span></div>
-      <div class="w"><b>Website &amp; SEO</b><span>aashirwadtapes.com &mdash; built, structured and optimised to be found.</span></div>
-      <div class="w"><b>This catalogue</b><span>Digital catalogue and the printed brochure it came from.</span></div>
-      <div class="w"><b>AR Tape Game</b><span>A browser AR game that captures a lead.</span></div>
-      <div class="w"><b>Tape Roll Out</b><span>A sixty&#8209;second game that turns a visitor into a WhatsApp enquiry.</span></div>
-    </div>
-    <div class="ctas" style="align-items:center">
-      <a class="btn btn-wa" id="ladwa" href="#" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.24-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.55-.43h-.47c-.16 0-.42.06-.64.31-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.17 1.69 2.58 4.1 3.62.57.25 1.02.39 1.37.5.57.18 1.1.16 1.51.1.46-.07 1.42-.58 1.62-1.15.2-.56.2-1.05.14-1.15-.06-.1-.22-.16-.47-.28z"/></svg>
-        Get this for your brand
-      </a>
-      <a class="btn btn-line" href="https://liveaidream.com" target="_blank" rel="noopener">liveaidream.com</a>
-      <span class="ladqr">
-        <img src="assets/qr-lad.png" alt="QR code to liveaidream.com" loading="lazy">
-        <span>Scan for<br>liveaidream.com</span>
-      </span>
-    </div>
-    <p class="body" style="margin-top:20px;color:var(--gray)">
-      Live AI Dream &mdash; Delhi NCR &amp; La Jolla, San Diego.
-      Aashirwad Tapes Industries Pvt Ltd, Kundli, Sonipat, Haryana &middot;
-      <a href="https://aashirwadtapes.com" style="color:var(--white)">aashirwadtapes.com</a>
-    </p>
-  </section>
-
 </main>
 
 <!-- slide index --------------------------------------------------------- -->
@@ -621,21 +589,18 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   <h4>Contents</h4>
   <div class="ixgrid" id="ixgrid"></div>
   <p class="credit">Marketing strategy &amp; execution partner &mdash;
-    <a href="https://liveaidream.com" target="_blank" rel="noopener">Live AI Dream</a></p>
+    <a class="ln" href="https://liveaidream.com" rel="noopener">Live AI Dream</a></p>
 </div>
 
 <!-- bottom bar ---------------------------------------------------------- -->
+<button class="navbtn" id="prev" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 4.5 8.5 12 15.5 19.5" stroke="rgba(0,0,0,.5)" stroke-width="7"/><path d="M15.5 4.5 8.5 12 15.5 19.5" stroke="#FFD400" stroke-width="4.2"/></svg></button>
+<button class="navbtn" id="next" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 4.5 15.5 12 8.5 19.5" stroke="rgba(0,0,0,.5)" stroke-width="7"/><path d="M8.5 4.5 15.5 12 8.5 19.5" stroke="#FFD400" stroke-width="4.2"/></svg></button>
+
 <nav id="bar" aria-label="Catalogue navigation">
-  <button class="navbtn" id="prev" aria-label="Previous page">&#8249;</button>
   <button id="where" aria-haspopup="dialog" aria-expanded="false">
-    <span class="num" id="counter">01&middot;14</span>
+    <span class="num" id="counter">1/14</span>
     <span class="ttl" id="title">Product catalogue 2026</span>
   </button>
-  <button class="navbtn" id="next" aria-label="Next page">&#8250;</button>
-  <a id="enquire" href="#" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.24-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.55-.43h-.47c-.16 0-.42.06-.64.31-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.17 1.69 2.58 4.1 3.62.57.25 1.02.39 1.37.5.57.18 1.1.16 1.51.1.46-.07 1.42-.58 1.62-1.15.2-.56.2-1.05.14-1.15-.06-.1-.22-.16-.47-.28z"/></svg>
-    <span>Enquire</span>
-  </a>
 </nav>
 
 <script>
@@ -654,7 +619,6 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   var title   = document.getElementById('title');
   var prev    = document.getElementById('prev');
   var next    = document.getElementById('next');
-  var enquire = document.getElementById('enquire');
   var where   = document.getElementById('where');
   var index   = document.getElementById('index');
   var ixgrid  = document.getElementById('ixgrid');
@@ -665,8 +629,9 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
      not a product, so the enquiry names the range instead. */
   function askOf(i) { return slides[i].getAttribute('data-ask') || nameOf(i); }
 
-  /* Live AI Dream's own capture, so the work on this deck earns its own leads. */
-  document.getElementById('ladwa').href =
+  /* Live AI Dream's own capture, where the page carrying it is present. */
+  var ladwa = document.getElementById('ladwa');
+  if (ladwa) ladwa.href =
     'https://wa.me/' + LAD_WA + '?text=' + encodeURIComponent(
       'Hi Live AI Dream — I saw the Aashirwad Tapes 2026 catalogue you built. ' +
       'I would like to talk about marketing strategy, a website and stand experiences for my brand.');
@@ -674,14 +639,13 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   /* The enquiry carries the page the visitor was on, so the sales team knows
      what they were looking at before they picked up the phone. */
   function paint() {
-    counter.textContent = pad(cur + 1) + '·' + pad(total);
+    counter.textContent = (cur + 1) + '/' + total;
     title.textContent = nameOf(cur);
     prev.disabled = (cur === 0);
     next.disabled = (cur === total - 1);
     var link = 'https://wa.me/' + AASHIRWAD_WA + '?text=' + encodeURIComponent(
       'Hi Aashirwad Tapes — I am browsing your 2026 catalogue. ' +
       'I would like a quote on: ' + askOf(cur) + '.');
-    enquire.href = link;
     var coverCta = document.getElementById('enquireCover');
     if (coverCta) coverCta.href = link;
     var kids = ixgrid.children;
