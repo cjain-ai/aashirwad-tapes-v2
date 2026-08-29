@@ -140,30 +140,30 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
 .slide.cover{justify-content:space-between; gap:clamp(14px,2.4vh,24px);
              padding-top:clamp(16px,3vh,34px);
              padding-bottom:calc(var(--bar) + 16px)}
-/* the scan tile sets the height; the credit and the buttons stack beside it
-   and together come to exactly that height. */
-.coverfoot{display:flex; flex-direction:row; gap:10px; align-items:stretch;
-           width:100%; max-width:640px}
-.scan{flex:0 0 auto; width:clamp(112px,13.5vw,132px); padding:5px; background:#FFFFFF;
-      border-radius:2px; display:block; line-height:0; align-self:flex-start}
-.scan img{width:100%; height:auto; display:block;
-          image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
-.footright{flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:9px}
-.ladbar{flex:1 1 auto; display:flex; align-items:center; background:var(--black-soft);
-        border:1px solid #333333; border-left:3px solid var(--red); border-radius:2px;
-        padding:8px 13px}
+/* three labelled codes in one box: scan one, or tap it -- the label is the
+   button. Tiles are a fixed width so the codes cannot balloon on a wide
+   screen; they only ever need to clear their decode floor, not fill the row. */
+.coverfoot{display:flex; flex-direction:column; gap:11px; align-self:flex-start;
+           max-width:100%; background:var(--black-soft); border:1px solid #333333;
+           border-left:3px solid var(--red); border-radius:2px; padding:13px 14px}
+.ladbar{padding:0}
 .ladbar b{font-family:var(--cond); font-weight:700; color:var(--gray-light);
           font-size:clamp(11px,1.3vw,13px); letter-spacing:.13em; text-transform:uppercase;
           line-height:1.35}
 .ladname{display:block; color:var(--white); font-size:clamp(14px,1.7vw,17.5px);
          letter-spacing:.07em; white-space:nowrap}
-.plays{display:flex; flex-wrap:nowrap; gap:9px; flex:0 0 auto}
-.plays a{flex:1 1 0; min-width:0; display:flex; align-items:center; justify-content:center;
-         text-align:center; font-family:var(--cond); font-weight:700;
-         font-size:clamp(11.5px,1.4vw,14px); letter-spacing:.06em; text-transform:uppercase;
-         color:#FFFFFF; background:var(--red); padding:8px 6px; border-radius:2px;
-         text-decoration:none; line-height:1.18}
-.plays a:hover{background:var(--red-dark)}
+.tiles{display:flex; flex-wrap:nowrap; gap:9px; align-items:flex-start}
+.tile{flex:0 1 116px; min-width:0; display:flex; flex-direction:column; text-decoration:none}
+.tile img{width:100%; height:auto; display:block; background:#FFFFFF; padding:4px;
+          border-radius:2px 2px 0 0;
+          image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges}
+.lbl{display:block; text-align:center; font-family:var(--cond); font-weight:700;
+     font-size:clamp(10.5px,1.25vw,13px); letter-spacing:.06em; text-transform:uppercase;
+     color:#FFFFFF; background:var(--red); padding:8px 5px; border-radius:0 0 2px 2px;
+     line-height:1.2}
+.tile:hover .lbl{background:var(--red-dark)}
+.lbl-alt{background:var(--black-mid); color:var(--white)}
+.tile:hover .lbl-alt{background:#3A3A3A}
 
 /* ---- tape photography ------------------------------------------------- */
 .phototrio{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:26px}
@@ -277,7 +277,9 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
   :root{--bar:70px}
   .g2,.g3,.g5{grid-template-columns:1fr}
   .phototrio{grid-template-columns:repeat(2,1fr); gap:14px}
-  .plays a{font-size:11px; letter-spacing:.02em; padding:8px 4px}
+  .lbl{font-size:9.5px; letter-spacing:.01em; padding:7px 3px}
+  .tile{flex:1 1 0}
+  .coverfoot{align-self:stretch; padding:11px}
   #where .ttl{display:none}
   .game{flex-direction:column; align-items:flex-start}
   .stats{gap:14px}
@@ -312,18 +314,23 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
     <!-- The credit and the games sit on the cover, not only on the closing
          slide, because most readers never reach the last page. -->
     <div class="coverfoot">
-      <a class="scan" href="https://liveaidream.com" target="_blank" rel="noopener">
-        <img src="assets/qr-lad.png" alt="Scan for liveaidream.com" loading="lazy">
-      </a>
-      <div class="footright">
-        <div class="ladbar">
-          <b>Marketing strategy &amp; execution partner
-             <span class="ladname">Live AI Dream</span></b>
-        </div>
-        <div class="plays">
-          <a href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">Play AR<br>Tape Game</a>
-          <a href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">Play Tape<br>Roll Out</a>
-        </div>
+      <div class="ladbar">
+        <b>Marketing strategy &amp; execution partner
+           <span class="ladname">Live AI Dream</span></b>
+      </div>
+      <div class="tiles">
+        <a class="tile" href="https://liveaidream.com" target="_blank" rel="noopener">
+          <img src="assets/qr-lad.png" alt="QR code to liveaidream.com" loading="lazy">
+          <span class="lbl lbl-alt">liveaidream.com</span>
+        </a>
+        <a class="tile" href="https://liveaidream.com/go/aashirwad-ar" target="_blank" rel="noopener">
+          <img src="assets/qr-ar.png" alt="QR code to play the AR Tape Game" loading="lazy">
+          <span class="lbl">Play AR Tape Game</span>
+        </a>
+        <a class="tile" href="https://liveaidream.com/go/aashirwad-run" target="_blank" rel="noopener">
+          <img src="assets/qr-run.png" alt="QR code to play Tape Roll Out" loading="lazy">
+          <span class="lbl">Play Tape Roll Out</span>
+        </a>
       </div>
     </div>
 
