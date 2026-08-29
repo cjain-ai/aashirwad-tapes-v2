@@ -71,7 +71,7 @@ body{
 }
 .slide.dark .eyebrow{color:var(--red)}
 h1,h2{font-family:var(--display); font-weight:400; margin:0; line-height:.94; letter-spacing:1px; text-wrap:balance}
-h1{font-size:clamp(46px,9vw,104px)}
+h1{font-size:clamp(36px,6vw,72px)}
 h2{font-size:clamp(34px,5.6vw,68px)}
 h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); margin:0 0 6px; letter-spacing:.01em}
 .accent{color:var(--red)}
@@ -137,11 +137,13 @@ h3{font-family:var(--cond); font-weight:700; font-size:clamp(17px,2vw,21px); mar
            font-size:clamp(34px,4.6vw,52px); line-height:.9; letter-spacing:1px; margin-bottom:4px}
 
 /* ---- cover: logo tight to the top, credit strip pinned low ------------ */
-.slide.cover{justify-content:space-between; gap:clamp(16px,3vh,30px);
-             padding-top:clamp(16px,3vh,34px)}
+.slide.cover{justify-content:space-between; gap:clamp(14px,2.4vh,24px);
+             padding-top:clamp(16px,3vh,34px);
+             padding-bottom:calc(var(--bar) + 16px)}
 /* the scan tile sets the height; the credit and the buttons stack beside it
    and together come to exactly that height. */
-.coverfoot{display:flex; flex-direction:row; gap:10px; align-items:stretch}
+.coverfoot{display:flex; flex-direction:row; gap:10px; align-items:stretch;
+           width:100%; max-width:640px}
 .scan{flex:0 0 auto; width:clamp(112px,13.5vw,132px); padding:5px; background:#FFFFFF;
       border-radius:2px; display:block; line-height:0; align-self:flex-start}
 .scan img{width:100%; height:auto; display:block;
